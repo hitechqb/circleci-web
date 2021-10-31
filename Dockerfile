@@ -25,7 +25,7 @@ RUN adduser -S hitechqb -u 1001
 RUN chown -R 777 /app
 
 # You only need to copy next.config.js if you are NOT using the default configuration
-COPY --from=builder /app/static ./static
+#COPY --from=builder /app/static ./static
 COPY --from=builder --chown=hitechqb:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
