@@ -26,6 +26,14 @@ jobs:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
 
+  deploy:
+    # Please add $SSH_KEY_FINGERPRINT, $DEPLOYED_USER@ and DEPLOYED_SERVER to project's environment
+    executor: docker/docker
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - $SSH_KEY_CIRCLE_CI
+      - run: ssh -oStrictHostKeyChecking=no $USERNAME_CIRCLE_CI@$IP_SERVER_GCLOUD ./deploy.sh
 workflows:
   my-pipeline:
     jobs:
@@ -37,4 +45,7 @@ workflows:
             branches:
               only:
                 - master
+#      - deploy:
+#          requires:
+#            - build-and-push
 

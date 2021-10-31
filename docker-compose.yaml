@@ -1,0 +1,10 @@
+version: "3.4"
+
+services:
+  circleci-web:
+    image: hitechqb/circleci-web:latest
+    container_name: circleci-web
+    ports:
+      - "6060:6060"
+    restart: always
+    network_mode: bridge

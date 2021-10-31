@@ -7,7 +7,7 @@ COPY package.json ./
 RUN npm install --frozen-lockfile
 
 # Rebuild the source code only when needed
-FROM node:alpine AS builder
+FROM node:17-alpine AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
@@ -20,10 +20,6 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S hitechqb -u 1001
-RUN chown -R 777 /app
-
 # You only need to copy next.config.js if you are NOT using the default configuration
 #COPY --from=builder /app/static ./static
 COPY --from=builder --chown=hitechqb:nodejs /app/.next ./.next
@@ -33,6 +29,6 @@ COPY --from=builder /app/next.config.js ./next.config.js
 
 USER hitechqb
 
-EXPOSE 8060
+EXPOSE 6060
 
-CMD ["npm", "start", "-p", "8060"]
+CMD ["npm", "start", "-p", "6060"]
