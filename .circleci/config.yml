@@ -3,7 +3,6 @@ orbs:
   node: circleci/node@4.7
 
 workflows:
-  sample:
+  unittest:
     jobs:
-      - node/test:
-          version: '16.10'
+      - node/test
