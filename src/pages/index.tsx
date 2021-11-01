@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          NextJs Site
+          NextJs VietNam
         </h1>
       </main>
 
